@@ -8,4 +8,6 @@ public interface BooksRepository {
 
     List<Book> findAllBooks();
 
+    void addBook(String author, String title, String status, List<String> tags);
+
 }

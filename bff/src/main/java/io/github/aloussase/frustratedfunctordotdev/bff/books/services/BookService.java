@@ -18,4 +18,8 @@ public class BookService {
     public List<Book> listBooks() {
         return books.findAllBooks();
     }
+
+    public void addBook(String author, String title, String status, List<String> tags) {
+        books.addBook(author, title, status, tags);
+    }
 }

@@ -1,12 +1,10 @@
 package io.github.aloussase.frustratedfunctordotdev.bff.books.controller;
 
 import io.github.aloussase.frustratedfunctordotdev.bff.books.dto.BookDto;
+import io.github.aloussase.frustratedfunctordotdev.bff.books.dto.NewBookDto;
 import io.github.aloussase.frustratedfunctordotdev.bff.books.services.BookService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -28,8 +26,14 @@ public class BooksController {
     }
 
     @PostMapping
-    public ResponseEntity<?> addBook() {
-        return null;
+    public ResponseEntity<Void> addBook(@RequestBody NewBookDto newBookDto) {
+        booksService.addBook(
+                newBookDto.author(),
+                newBookDto.title(),
+                newBookDto.status(),
+                newBookDto.tags()
+        );
+        return ResponseEntity.noContent().build();
     }
 
     // TODO: Update books.

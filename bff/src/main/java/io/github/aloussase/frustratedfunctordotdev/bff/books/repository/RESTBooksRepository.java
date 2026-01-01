@@ -2,12 +2,15 @@ package io.github.aloussase.frustratedfunctordotdev.bff.books.repository;
 
 import feign.RequestInterceptor;
 import io.github.aloussase.frustratedfunctordotdev.bff.books.domain.Book;
+import io.github.aloussase.frustratedfunctordotdev.bff.books.dto.NewBookDto;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -25,6 +28,9 @@ public class RESTBooksRepository implements BooksRepository {
     public interface ApiClient {
         @GetMapping("/api/v1/books")
         List<Book> getBooks();
+
+        @PostMapping("/api/v1/books")
+        void addBook(@RequestBody NewBookDto book);
     }
 
     @Configuration
@@ -50,5 +56,11 @@ public class RESTBooksRepository implements BooksRepository {
     @Override
     public List<Book> findAllBooks() {
         return api.getBooks();
+    }
+
+    @Override
+    public void addBook(String author, String title, String status, List<String> tags) {
+        final var dto = new NewBookDto(author, title, status, tags);
+        api.addBook(dto);
     }
 }
