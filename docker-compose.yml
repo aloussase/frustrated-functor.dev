@@ -1,12 +1,54 @@
 services:
+  site:
+    container_name: frustrated-functor-site
+    restart: unless-stopped
+    image: aloussase69/frustratedfunctordotdev
+    build:
+      context: ./site
+    environment:
+      - BOOKS_API_BASE_URL=http://api:8080
+      - BOOKS_API_CLIENT_ID=
+      - BOOKS_API_CLIENT_SECRET=
+      - POSTS_API_BASE_URL=
+      - POSTS_API_CLIENT_ID="ttp://api:8080
+      - POSTS_API_CLIENT_SECRET=
+      - UMAMI_BASE_URL=http://umami
+      - UMAMI_WEBSITE_ID=
+    ports:
+      - "3000:8080"
+
+  api:
+    container_name: frustrated-functor-api
+    restart: unless-stopped
+    image: aloussase69/frustratedfunctordotdevapi
+    build:
+      context: ./api
+    environment:
+      - DB_URL=jdbc:postgresql://db:5432/postgres
+      - DB_USER=postgres
+      - DB_PASSWORD=postgres
+
+  bff:
+    container_name: frustrated-functor-bff
+    restart: unless-stopped
+    image: aloussase69/frustratedfunctordotdevbff
+    environment:
+      - BOOKS_API_BASE_URL=http://api:8080
+      - BOOKS_API_CLIENT_ID=
+      - BOOKS_API_CLIENT_SECRET=
+    ports:
+      - "3001:8080"
+    build:
+      context: ./bff
+
   db:
     image: postgres:17
     restart: unless-stopped
-    ports:
-      - "5432:5432"
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: postgres
+    ports:
+      - "5432:5432"
     volumes:
-      - ./src/main/resources/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+      - ./scripts/init.sql:/docker-entrypoint-initdb.d/init.sql:ro

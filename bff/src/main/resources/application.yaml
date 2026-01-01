@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: bff
+
+books:
+  api:
+    base_url: ${BOOKS_API_BASE_URL}
+    client_id: ${BOOKS_API_CLIENT_ID}
+    client_secret: ${BOOKS_API_CLIENT_SECRET}
