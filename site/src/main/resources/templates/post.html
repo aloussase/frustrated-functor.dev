@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en"
+      layout:decorate="~{layout}"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.thymeleaf.org"
+>
+<head>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/idea.min.css">
+    <title layout:title="${post.title}"></title>
+</head>
+<body>
+
+<div layout:fragment="content">
+
+    <article>
+        <div id="raw-post-contents" th:text="${post.content}"></div>
+        <div id="post">
+            <div class="post-info">
+                <small th:text="'Last updated ' + ${#strings.arraySplit(post.date, ' ')[0]}"></small>
+            </div>
+        </div>
+    </article>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked-highlight/lib/index.umd.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/java.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/haskell.min.js"></script>
+    <script type="module">
+        import {Marked} from "https://cdn.jsdelivr.net/npm/marked/lib/marked.esm.js";
+
+        const {markedHighlight} = globalThis.markedHighlight
+        const marked = new Marked(
+            markedHighlight({
+                emptyLangClass: 'hljs',
+                langPrefix: 'hljs language-',
+                highlight(code, lang, info) {
+                    const language = hljs.getLanguage(lang) ? lang : 'plaintext';
+                    return hljs.highlight(code, {language}).value;
+                }
+            })
+        )
+
+        const rawMd = document.getElementById("raw-post-contents").textContent
+        document.getElementById("post").innerHTML += marked.parse(rawMd)
+    </script>
+
+</div>
+
+</body>
+</html>

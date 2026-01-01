@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Blog about Java, SpringBoot and programming in general."/>
+    <meta property="og:title" content="Alexander Goussas - Blog about Java, SpringBoot and all things programming."/>
+    <meta property="og:description" content="Blog about Java, SpringBoot and programming in general."/>
+    <meta property="og:image" content="https://frustrated-functor.dev/icon.png"/>
+    <link rel="icon" type="image/x-icon" href="/icon.png">
+    <link rel="stylesheet" href="/index.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/cmatrix" defer></script>
+    <!--    <script src="/cmatrix.js" defer></script>-->
+    <script defer th:src="${@environment.getProperty('app.umami.baseUrl')} + '/script.js'"
+            async
+            th:data-website-id="${@environment.getProperty('app.umami.websiteId')}"></script>
+    <title layout:title-pattern="$LAYOUT_TITLE - $CONTENT_TITLE">Alexander Goussas</title>
+</head>
+<body>
+<canvas id="matrix"></canvas>
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+<main>
+    <div layout:fragment="content"></div>
+</main>
+<footer>
+    <small>Copyright Alexander Goussas 2025</small>
+    <small>Made with coffee & <3</small>
+</footer>
+</body>
+</html>
+

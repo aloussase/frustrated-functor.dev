@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en"
+      layout:decorate="~{layout}"
+      xmlns:layout="http://www.thymeleaf.org"
+>
+<head>
+    <title layout:title="Books - Alexander Goussas"></title>
+</head>
+<body>
+
+<div layout:fragment="content" id="books">
+
+    <h1>Books</h1>
+
+    <p>
+        These are books I am either reading, have read or that I'm interested in reading.
+        I accept suggestions :).
+    </p>
+
+    <p th:if="${#lists.isEmpty(books)}">Guess I've been not reading of late...</p>
+
+    <form id="book-filters" method="post" action="/books/filter">
+        <label for="tag-select">Tag:
+            <select name="tag" id="tag-select">
+                <option th:each="tag : ${tags}" th:text="${tag}" th:value="${tag}"></option>
+            </select>
+        </label>
+        <button type="submit">Filter</button>
+    </form>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Status</th>
+            <th>Updated</th>
+            <th>Tags</th>
+        </tr>
+        </thead>
+        <tr class="book" th:each="book : ${books}">
+            <td th:text="${book.title}"></td>
+            <td th:text="${book.author}"></td>
+            <td th:text="${book.status}"></td>
+            <td th:text="${#dates.format(book.lastUpdated, 'dd-MM-yyyy')}"></td>
+            <td th:unless="${#lists.isEmpty(book.tags)}" class="tags">
+                <span
+                        th:each="tag : ${book.tags}"
+                        th:text="${tag}" class="tag"></span>
+            </td>
+        </tr>
+    </table>
+
+</div>
+
+</body>
+</html>

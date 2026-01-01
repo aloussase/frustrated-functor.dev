@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: frustratedfunctordotdev
+
+books:
+  api:
+    base_url: ${BOOKS_API_BASE_URL}
+    client_id: ${BOOKS_API_CLIENT_ID}
+    client_secret: ${BOOKS_API_CLIENT_SECRET}
+
+posts:
+  api:
+    base_url: ${POSTS_API_BASE_URL}
+    client_id: ${POSTS_API_CLIENT_ID}
+    client_secret: ${POSTS_API_CLIENT_SECRET}
+
+app:
+  umami:
+    baseUrl: ${UMAMI_BASE_URL:-http://localhost:3002}
+    websiteId: ${UMAMI_WEBSITE_ID:-123456}

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en"
+      layout:decorate="~{layout}"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.thymeleaf.org"
+>
+<head>
+    <title layout:title="CV | Alexander Goussas"></title>
+</head>
+<body>
+
+<div layout:fragment="content" id="cv">
+
+    <h1>Curriculum Vitae</h1>
+
+    <section id="work">
+        <h2>Work Experience</h2>
+        <div class="work-entry" th:each="entry : ${workEntries}">
+            <div class="work-entry-tagline">
+                <span class="work-entry-company" th:text="${entry.company}"> </span>
+                <span class="work-entry-date" th:text="${entry.date}"> </span>
+            </div>
+            <span class="work-entry-position" th:text="${entry.position}"></span>
+            <span class="work-entry-description" th:text="${entry.description}"> </span>
+        </div>
+    </section>
+
+    <section id="education">
+        <h2>Education</h2>
+        <div class="education-entry" th:each="entry : ${educationEntries}">
+            <div class="education-entry-tagline">
+                <span class="education-entry-institution" th:text="${entry.institution}"> </span>
+                <span class="education-entry-date" th:text="${entry.date}"> </span>
+            </div>
+            <span class="education-entry-title" th:text="${entry.title}"></span>
+            <span class="education-entry-description" th:text="${entry.description}"> </span>
+        </div>
+    </section>
+
+    <section id="skills">
+        <h2>Skills and Languages</h2>
+
+        <p>
+            I use Java and SpringBoot on a daily basis. I also run a homelab and I've been using Linux
+            since 2019, when I was addicted to <em>ricing</em>. I have had my faire share of Haskell as well,
+            and I enjoy learning about different languages, including implementation details.
+        </p>
+
+        <ul id="languages">
+            <li>Spanish(Native)</li>
+            <li>English(C2)</li>
+            <li>French(B1/B2)</li>
+            <li>Portuguese(B2)</li>
+            <li>German(A1)</li>
+        </ul>
+    </section>
+
+</div>
+
+</body>
+</html>
