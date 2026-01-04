@@ -123,15 +123,18 @@ main {
         ul {
             list-style: none;
             display: flex;
-            flex-direction: column;
             width: 100%;
             align-items: flex-end;
             justify-content: flex-start;
-            gap: 0.4rem;
+            gap: 0.8rem;
 
             li {
                 a {
                     text-decoration: none;
+
+                    i {
+                        font-size: 2rem;
+                    }
                 }
             }
         }
