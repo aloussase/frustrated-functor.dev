@@ -212,11 +212,36 @@ main {
             margin-bottom: 1rem;
         }
 
-        #languages {
-            list-style: none;
+        #skills div {
+            display: flex;
+            width: 100%;
+            gap: 0.2rem;
+        }
 
-            li {
-                margin-bottom: 0.4rem;
+        #skillz {
+            width: 70%;
+
+            ul {
+                list-style: none;
+
+                .skill-name {
+                    font-weight: bold;
+                    font-style: italic;
+                }
+            }
+        }
+
+        #languages {
+            width: 30%;
+
+            ul {
+                list-style: none;
+
+                li {
+                    margin-bottom: 0.4rem;
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                }
             }
         }
 
@@ -226,6 +251,9 @@ main {
                 flex-direction: column;
                 gap: 0.4rem;
                 margin-bottom: 2rem;
+
+                p {
+                }
 
                 .work-entry-company, .education-entry {
                     font-weight: bold;
